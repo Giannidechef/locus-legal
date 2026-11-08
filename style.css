@@ -1,0 +1,140 @@
+/* Locus pages: the app's look (dark, Sage lens, cream highlight, Poppins). */
+@font-face { font-family: "Poppins"; font-weight: 400; font-style: normal; font-display: swap; src: url("fonts/Poppins-Regular.woff") format("woff"); }
+@font-face { font-family: "Poppins"; font-weight: 500; font-style: normal; font-display: swap; src: url("fonts/Poppins-Medium.woff") format("woff"); }
+@font-face { font-family: "Poppins"; font-weight: 600; font-style: normal; font-display: swap; src: url("fonts/Poppins-SemiBold.woff") format("woff"); }
+:root {
+  --bg: #0A0A0B;
+  --surface: #17171A;
+  --surface-raised: #212125;
+  --stroke: #2A2A2F;
+  --text: #FFFFFF;
+  --text-2: #A8A8AF;
+  --text-3: #6B6B72;
+  --sage: #A9B9A4;
+  --sage-deep: #6E7D69;
+  --cream: #F6EDE4;
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--text);
+  font: 400 16px/1.65 "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+/* A soft lens glow behind the top of the page. */
+body::before {
+  content: "";
+  position: fixed;
+  top: -340px; left: 50%;
+  width: 760px; height: 760px;
+  transform: translateX(-50%);
+  background: radial-gradient(circle, rgba(169,185,164,.20) 0%, rgba(169,185,164,.06) 38%, transparent 68%);
+  pointer-events: none;
+  z-index: 0;
+}
+main {
+  position: relative;
+  z-index: 1;
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 56px 20px 72px;
+}
+
+/* Header: app icon + wordmark */
+header { display: flex; align-items: center; gap: 14px; margin-bottom: 44px; }
+header .icon {
+  width: 52px; height: 52px;
+  border-radius: 12px;
+  box-shadow: 0 0 0 1px var(--stroke), 0 10px 30px rgba(169,185,164,.18);
+}
+.brand { font-weight: 600; font-size: 13px; letter-spacing: .32em; color: var(--cream); }
+
+h1 {
+  font-weight: 600;
+  font-size: clamp(34px, 7vw, 44px);
+  line-height: 1.1;
+  letter-spacing: -.02em;
+  margin: 0 0 14px;
+  background: linear-gradient(135deg, var(--text) 30%, var(--cream) 60%, var(--sage) 100%);
+  -webkit-background-clip: text; background-clip: text;
+  color: transparent;
+}
+h1 + p { font-size: 17px; color: var(--text-2); margin: 0 0 8px; }
+
+h2 {
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--sage);
+  margin: 44px 0 14px;
+}
+p, li { color: var(--text-2); }
+p { margin: 0 0 14px; }
+strong { color: var(--text); font-weight: 500; }
+em { font-style: normal; color: var(--cream); }
+a { color: var(--sage); text-decoration: none; border-bottom: 1px solid rgba(169,185,164,.35); transition: color .15s, border-color .15s; }
+a:hover { color: var(--cream); border-color: var(--cream); }
+
+/* Questions: one rounded row each, like the app's settings rows. */
+.faq { display: grid; gap: 10px; }
+.faq p {
+  margin: 0;
+  padding: 18px 20px;
+  background: var(--surface);
+  border: 1px solid var(--stroke);
+  border-radius: 16px;
+}
+.faq p strong { display: block; margin-bottom: 4px; font-size: 16px; }
+
+/* Lists as quiet cards */
+ul { list-style: none; padding: 0; margin: 0 0 14px; display: grid; gap: 10px; }
+li {
+  position: relative;
+  padding: 16px 20px 16px 42px;
+  background: var(--surface);
+  border: 1px solid var(--stroke);
+  border-radius: 16px;
+}
+li::before {
+  content: "";
+  position: absolute; left: 20px; top: 25px;
+  width: 8px; height: 8px; border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, var(--cream), var(--sage) 70%);
+}
+
+/* Highlight card (contact, "in short") */
+.card {
+  margin: 28px 0;
+  padding: 22px 24px;
+  border-radius: 20px;
+  color: var(--text-2);
+  background:
+    linear-gradient(var(--surface), var(--surface)) padding-box,
+    linear-gradient(135deg, rgba(169,185,164,.55), rgba(246,237,228,.18) 50%, var(--stroke)) border-box;
+  border: 1px solid transparent;
+  box-shadow: 0 20px 50px rgba(0,0,0,.35);
+}
+.card strong { color: var(--cream); }
+
+footer {
+  margin-top: 56px;
+  padding-top: 20px;
+  border-top: 1px solid var(--stroke);
+  font-size: 13px;
+  color: var(--text-3);
+}
+footer a { color: var(--text-2); border-color: transparent; }
+footer a:hover { color: var(--cream); }
+
+@media (max-width: 480px) {
+  main { padding-top: 36px; }
+  header { margin-bottom: 32px; }
+  .faq p, li, .card { padding-left: 18px; padding-right: 18px; }
+  li { padding-left: 38px; }
+  li::before { left: 18px; }
+}
